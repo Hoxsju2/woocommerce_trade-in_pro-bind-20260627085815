@@ -1,0 +1,138 @@
+:root {
+  --wtip-vh: 1vh;
+}
+.wtip-trigger {
+  background: #111827;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.wtip-trigger:hover { background: #0b1220; }
+
+/* Inline modal: always part of page flow */
+.wtip-modal-backdrop {
+  display: none !important;
+}
+.wtip-modal {
+  position: static;
+  display: none;
+  width: 100%;
+  z-index: auto;
+  padding: 0;
+  overflow: visible;
+}
+.wtip-card {
+  background: #fff;
+  width: 100%;
+  max-width: 720px;
+  margin: 12px auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+}
+.wtip-header {
+  padding: 16px 18px; border-bottom: 1px solid #efefef; display: flex; align-items: center; justify-content: space-between;
+  flex: 0 0 auto;
+}
+.wtip-title { font-size: 20px; font-weight: 700; margin: 0; }
+.wtip-subtitle { color: #6b7280; margin-top: 4px; font-size: 14px; }
+.wtip-body { padding: 16px 18px; flex: 1 1 auto; overflow: auto; -webkit-overflow-scrolling: touch; }
+.wtip-footer { padding: 12px 18px; border-top: 1px solid #efefef; display: flex; gap: 12px; justify-content: flex-end; flex: 0 0 auto; }
+
+/* Compact spacing helper for fields */
+.wtip-field { margin-top: 10px; }
+
+.wtip-close {
+  background: transparent; border: none; font-size: 20px; cursor: pointer; color: #6b7280;
+}
+.wtip-input, .wtip-select, .wtip-number, .wtip-email, .wtip-code, .wtip-file {
+  width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; outline: none; font-size: 14px;
+}
+.wtip-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* By default, rows collapse on mobile, except those marked as --pair */
+@media (max-width: 640px) { 
+  .wtip-row { grid-template-columns: 1fr; }
+  .wtip-row.wtip-row--pair { grid-template-columns: 1fr 1fr; }
+}
+
+.wtip-btn {
+  padding: 10px 16px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600;
+}
+.wtip-btn-primary { background: #2563eb; color: #fff; }
+.wtip-btn-primary:disabled { background: #9db7f6; cursor: not-allowed; }
+.wtip-btn-secondary { background: #f3f4f6; color: #111827; }
+.wtip-btn-danger { background: #ef4444; color: #fff; }
+
+.wtip-steps { display: flex; gap: 8px; padding: 10px 18px; border-bottom: 1px dashed #eee; }
+.wtip-step { font-size: 12px; color: #6b7280; }
+.wtip-step.active { color: #111827; font-weight: 700; }
+
+.wtip-images { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.wtip-images img { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; border: 1px solid #e5e7eb; }
+
+.wtip-error { color: #b91c1c; margin-top: 8px; }
+.wtip-success { color: #065f46; margin-top: 8px; }
+.wtip-spinner {
+  width: 18px; height: 18px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; display: inline-block; animation: wtipspin 1s linear infinite;
+}
+@keyframes wtipspin { to { transform: rotate(360deg); } }
+
+/* User requests table */
+.wtip-user-requests { margin: 20px 0; }
+.wtip-user-requests h3 { margin: 0 0 12px; font-size: 20px; }
+.wtip-table-wrap { overflow-x: auto; }
+.wtip-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.wtip-table th, .wtip-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 14px;
+}
+.wtip-table thead th {
+  background: #f9fafb;
+  font-weight: 700;
+}
+.wtip-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #1e3a8a;
+}
+.wtip-badge.wtip-wtip_pending { background: #fff7ed; color: #9a3412; }
+.wtip-badge.wtip-wtip_approved { background: #ecfdf5; color: #065f46; }
+.wtip-badge.wtip-wtip_rejected { background: #fef2f2; color: #991b1b; }
+
+/* Extra-compact mobile refinements */
+@media (max-width: 640px) {
+  .wtip-card { 
+    margin: 8px auto; 
+    border-radius: 10px; 
+    max-height: 65vh;              /* fallback */
+    max-height: 65svh;             /* modern small viewport */
+    max-height: calc(var(--wtip-vh, 1vh) * 65); /* JS-updated reliable vh */
+    position: sticky;
+    position: -webkit-sticky;
+    top: calc(env(safe-area-inset-top, 0px) + 8px);
+    z-index: 10;
+  }
+  .wtip-header, .wtip-body, .wtip-footer { padding: 12px; }
+  .wtip-title { font-size: 18px; }
+  .wtip-subtitle { font-size: 12px; }
+  .wtip-steps { padding: 8px 12px; gap: 6px; }
+  .wtip-images img { width: 60px; height: 60px; }
+  .wtip-field { margin-top: 8px; }
+}
